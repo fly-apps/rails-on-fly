@@ -1,0 +1,27 @@
+<h1>Chirps!</h1>
+<p>Served from: <strong><%= ENV["FLY_REGION"] %></strong></p>
+<%= form_with scope: :chirp, url: chirps_path, local: true do |form| %>
+  <p>
+    <%= form.text_area :text, placeholder: "what's happening?", style: "width: 100%" %>
+    <em>Sincerely, <%= @author %></em>
+  </p>
+ 
+  <p>
+    <%= form.submit "CHIRP" %>
+  </p>
+<% end %>
+
+
+<% @chirps.each do |chirp| %>
+  <div style="background-color: #80CBC4; padding: 6px;">
+    <p style="font-size: 150%; margin: 0">
+      <%= chirp.text %>
+    </p>
+    <em>
+      Sincerely, <%= chirp.author %>
+    </em>
+    <br />
+    <%= time_ago_in_words(chirp.created_at) %> ago
+  </div>
+  <hr />
+<% end %>
